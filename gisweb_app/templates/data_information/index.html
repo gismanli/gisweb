@@ -1,0 +1,158 @@
+{% include 'header.html' %}
+{% load staticfiles %}
+
+<!-- /left-nav-stack-bar -->
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-2" id="side_menu">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="resource">Data Resource<span class="glyphicon glyphicon-inbox right"></span></a></li>
+      <li class="active"><a href="information">Data Information<span class="glyphicon glyphicon-info-sign right"></span></a></li>
+      <li><a href="visualiser">Data Visualiser<span class="glyphicon glyphicon-globe right"></span></a></li>
+      <li><a href="tools">GeoSpatial Tools<span class="glyphicon glyphicon-cog right"></span></a></li>
+    </ul>
+  </div>
+
+<!-- left-nav-stack-bar/ -->
+
+<div class="col-md-10">
+<!-- /Data info box -->
+  <!-- /vector and raster tabs -->
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#vectorData" data-toggle="tab">Vector</a></li>
+    <li><a href="#rasterData" data-toggle="tab">Raster</a></li>
+  </ul>
+  <!-- vector and raster tabs/ -->
+  <!-- /vector contents -->
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="vectorData">
+      <!-- /vector collapse -->
+      {% load shp_dict %}
+      <div class="panel-group" id="accordion_vector">
+        {% if shp_error %}
+          <div class="alert alert-danger" role="alert">{{ shp_error }}</div>
+        {% else %}
+        {% for each in shps_info %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_vector" href="#vector{{ forloop.counter0 }}">
+                {{ each|file_name }}
+              </a>
+            </h4>
+          </div>
+          <div id="vector{{ forloop.counter0 }}" class="panel-collapse collapse">
+            <div class="panel-body">
+            <h4>File Format:</h4>
+            {{ each|file_format }}
+            <h4>Number of Layers:</h4>
+            {{ each|num_layer }}
+            <h4>Layer Name:</h4>
+            {{ each|layer_name }}
+            <h4>Number of Features:</h4>
+            {{ each|number_of_feature }}
+            <h4>Layer Type:</h4>
+            {{ each|layer_type }}
+            <h4>Layer Spatial Reference:</h4>
+            {{ each|layer_spatial_reference }}
+            <h4>Layer Extend:</h4>
+            {{ each|layer_extend }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% endif %}
+      </div>
+    </div>
+    <!-- vector collapse\ -->
+    <!-- vector contents/ -->
+    <!-- /raster contents -->
+    <div class="tab-pane fade in"  id="rasterData">
+      {% load tif_dict %}
+      <div class="panel-group" id="accordio_raster">
+      {% if tif_error %}
+          <div class="alert alert-danger" role="alert">{{ tif_error }}</div>
+        {% else %}
+        {% for each in tifs_info %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordio_raster" href="#raster{{ forloop.counter0 }}">{{ each|file_name }}</a>
+            </h4>
+          </div>
+          <div id="raster{{ forloop.counter0 }}" class="panel-collapse collapse">
+            <div class="panel-body">
+            <h4>File Format:</h4>
+            {{ each|file_format }}
+            <h4>Number of Bands:</h4>
+            {{ each|num_band }}
+            <h4>X Y size:</h4>
+            {{ each|raster_x_y_size }}
+            <h4>Raster Projection:</h4>
+            {{ each|raster_projection }}
+            <h4>Raster Geotransform:</h4>
+            {{ each|raster_geotransform }}
+            <h4>Raster Origin:</h4>
+            {{ each|raster_origin }}
+            <h4>Raster Pixle Size:</h4>
+            {{ each|raster_pixle_size }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% endif %}
+      </div>
+    </div>
+    <!-- raster contents/ -->
+</div>
+<!-- Data info box/ -->
+
+
+<script type="text/javascript">
+   $(document).ready(function(){
+    $(":radio:eq(0)").click(function(){
+        $("#matn").show(1000);
+     });
+
+     $(":radio:eq(1)").click(function(){
+        $("#matn").hide(1000);
+     });
+  });
+
+  if (!library)
+   var library = {};
+
+library.json = {
+   replacer: function(match, pIndent, pKey, pVal, pEnd) {
+      var key = '<span class=json-key>';
+      var val = '<span class=json-value>';
+      var str = '<span class=json-string>';
+      var r = pIndent || '';
+      if (pKey)
+         r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+      if (pVal)
+         r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+      return r + (pEnd || '');
+      },
+   prettyPrint: function(obj) {
+      var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+      return JSON.stringify(obj, null, 3)
+         .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+         .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+         .replace(jsonLine, library.json.replacer);
+      }
+   };
+
+  function print_metadata(data) {
+    $('#opendap_print_metadata').html('<pre><code>' + library.json.prettyPrint(data.metadata) + '</code></pre>');
+  }
+
+  function opendap_getmetadata() {
+    var opendap_url = $('#opendap_url').val();
+    Dajaxice.giscube_app.opendap_getmetadata(print_metadata,{'opendap_url':opendap_url});
+  }
+
+</script>
+
+{% include 'footer.html' %}

@@ -1,0 +1,159 @@
+{% load staticfiles %}
+
+<!-- vector tools-->
+{% include '/tools/re_project_shapefile.html' %}
+{% include '/tools/extract_shp_table.html' %}
+{% include '/tools/shp_to_kml.html' %}
+{% include '/tools/shp_to_tif.html' %}
+{% include '/tools/shp_to_json.html' %}
+{% include '/tools/coord_to_point_shp.html' %}
+{% include '/tools/buffer_shp.html' %}
+
+
+<!-- raster tools-->
+{% include '/tools/re_project_geotiff.html' %}
+{% include '/tools/clip_geotiff_by_shp.html' %}
+{% include '/tools/geotiff_to_kml.html' %}
+{% include '/tools/geotiff_resolution.html' %}
+{% include '/tools/tif_to_point_shp.html' %}
+{% include '/tools/tif_to_point_json.html' %}
+
+{% include 'header.html' %}
+
+
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-2" id="side_menu">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="resource">Data Resource<span class="glyphicon glyphicon-inbox right"></span></a></li>
+      <li><a href="information">Data Information<span class="glyphicon glyphicon-info-sign right"></span></a></li>
+      <li><a href="visualiser">Data Visualiser<span class="glyphicon glyphicon-globe right"></span></a></li>
+      <li class="active"><a href="tools">GeoSpatial Tools<span class="glyphicon glyphicon-cog right"></span></a></li>
+    </ul>
+  </div>
+
+<div id="toggle"> </div>
+
+<div class="container col-md-5">
+<div class="tree">
+    <ul>
+        <li>
+            <span><i class="icon-folder-open"></i><div id="tools_title">Vector Tools</div></span>
+            <ul>
+                <li>
+                	<span><i class="icon-minus-sign"></i><div id="tools_subtitle">Conversion</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="shp_to_kml"><div id="tool_title">Shapefile to KML</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="shp_to_tif"><div id="tool_title">Shapefile to GeoTIFF</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="shp_to_json"><div id="tool_title">Shapefile to GeoJSON</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span><i class="icon-minus-sign"></i><div id="tools_subtitle">Creation</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="coord_to_point_shp"><div id="tool_title">Coordinates to Point Shapefile</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span><i class="icon-minus-sign"></i><div id="tools_subtitle">Extraction</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="extract_shp_table"><div id="tool_title">Shapefile table to text</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span><i class="icon-minus-sign"></i><div id="tools_subtitle">Spatial Analysis</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="reproject_shapefile"><div id="tool_title">Re-Project Shapefile</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="buffer_shapefile"><div id="tool_title">Buffer Shapefile</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+<div class="container col-md-5">
+<div class="tree">
+    <ul>
+        <li>
+            <span><i class="icon-folder-open"></i><div id="tools_title">Raster Tools</div></span>
+            <ul>
+                <li>
+                	<span><i class="icon-minus-sign"></i><div id="tools_subtitle">Conversion</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="geotiff_to_kml"><div id="tool_title">GeoTIFF to KML</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="tif_to_point_shp"><div id="tool_title">GeoTIFF to point Shp</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="tif_to_point_json"><div id="tool_title">GeoTIFF to point JSON</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span><i class="icon-minus-sign"></i><div id="tools_subtitle">Spatial Analysis</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="reproject_geotiff"><div id="tool_title">Re-Project GeoTIFF</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="clip_geotiff_by_shp"><div id="tool_title">Clip GeoTIFF by Shapefile</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="geotiff_resolution"><div id="tool_title">Change GeoTIFF Resolution</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+	    </ul>
+        </li>
+    </ul>
+</div>
+</div>
+</div>
+
+<script>
+$(function () {
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+    $('.tree li.parent_li > span').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+});
+
+$(".open").click(function() {
+  var id = $(this).attr('id');
+  $("#menu_"+id).toggleClass("closed");
+  $("#toggle").toggleClass("closed");
+});
+
+$(".close").click(function(){
+  $(".menu").addClass("closed");
+  $("#toggle").toggleClass("closed");
+  });
+</script>
+
+{% include 'footer.html' %}

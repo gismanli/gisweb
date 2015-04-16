@@ -1,0 +1,42 @@
+{% load shp_dict %}
+
+
+<div class="menu closed" id="menu_extract_shp_table">
+<span class="close glyphicon glyphicon-remove red"></span>
+<h2>Extract Vector Table to text file.</h2>
+      <h3>This tool can extracts Shapefile attribute table to text file.</h3>
+      <div class="container">
+	<h2><small>1- Select from current vector data:</small></h2>
+      	{% if not shps_info %}
+	  <div class="alert alert-warning" role="alert">No shapefile</div>
+	{% endif %}
+	{% for each in shps_info %}
+	<div class="radio">
+	<input type="radio" name="optionsRadios" id="current_vector" value="{{ each|layer_name }}">
+	<p>{{ each|file_name }}</p>
+      </div>
+      {% endfor %}
+      
+      <h2><small>2- Enter text file name:</small></h2>
+      
+      <div class="input-group">
+      <input class="form-control" id="shp_table_text_name" type="text" placeholder="Enter file name" value="">
+    </div>
+
+  <button type="button" class="btn btn-primary btn-lg" onclick="extract_shp_table()">Extract table</button>
+      <p id='extract_shp_table_status'></p>
+    </div>
+</div>
+
+
+<script>
+  function extract_shp_table_status(data) {
+   document.getElementById('extract_shp_table_status').innerHTML = data.status;
+  }
+  function extract_shp_table() {
+    document.getElementById('extract_shp_table_status').innerHTML = 'Processing...';
+    var selected_vector = $('input[name="optionsRadios"]:checked').val();
+    var text_name = $('#shp_table_text_name').val();
+    Dajaxice.giscube_app.extract_shp_table_text(extract_shp_table_status,{'selected_vector': selected_vector, 'text_name':text_name});
+  }
+</script>

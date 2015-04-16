@@ -1,8 +1,3 @@
-![alt tag](https://github.com/MBoustani/GISCube/blob/master/giscube_app/static/img/logo.png)
-
-[Demo video](http://youtu.be/iV7SvP-gil4)
-=======
-
 ##Web Based GIS Application
 
 
@@ -37,3 +32,6 @@ Beside some open source GIS libraries and some software like ArcGIS there are co
 ##Example
 In this example, we are going to use "Clip GeoTIIF" tool to clip a GeoTIFF using Shapefile.
 [Example](https://github.com/MBoustani/GISCube/wiki/Example)
+
+# gisweb
+gis online

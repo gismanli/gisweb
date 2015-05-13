@@ -1,7 +1,6 @@
 import os, shutil
 import numpy as np
 import json
-from netCDF4 import Dataset
 from dajaxice.decorators import dajaxice_register
 from gisweb.config import MEDIA_ROOT, MEDIA_URL
 
@@ -11,8 +10,6 @@ from scripts.conversion import nc_to_gtif, nc_to_geojson, shp_to_kml, convert_ge
 from scripts.spatial_analysis import buffer_shapefile
 from scripts.clip_geotiff_by_shp import clip_geotiff_by_shp
 from scripts.data_management import change_geotiff_resolution
-from scripts.opendap import load as load_opendap
-from scripts.opendap import opendap_metadata
 
 
 @dajaxice_register(method='GET')

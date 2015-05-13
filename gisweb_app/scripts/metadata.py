@@ -11,7 +11,6 @@ try:
 except ImportError:
     import ogr
 
-from netCDF4 import Dataset
 import numpy as np
 import urllib2
 import json

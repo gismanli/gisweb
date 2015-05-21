@@ -34,6 +34,6 @@
     document.getElementById('geotiff_to_kml_status').innerHTML = 'Processing...';
     var selected_geotiff = $('input[name="existing_geotiff"]:checked').val();
     var geotiff_to_kml_name = $('#geotiff_to_kml_name').val();
-    Dajaxice.giscube_app.geotiff_to_kml(geotiff_to_kml_status,{'selected_geotiff': selected_geotiff, 'geotiff_to_kml_name':geotiff_to_kml_name});
+    Dajaxice.gisweb_app.geotiff_to_kml(geotiff_to_kml_status,{'selected_geotiff': selected_geotiff, 'geotiff_to_kml_name':geotiff_to_kml_name});
   }
 </script>

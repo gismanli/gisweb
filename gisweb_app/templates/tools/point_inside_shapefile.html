@@ -42,6 +42,6 @@
     var selected_vector = $('input[name="optionsRadios"]:checked').val();
     var point_inside_shapefile_lat = $('#point_inside_shapefile_lat').val();
     var point_inside_shapefile_lon = $('#point_inside_shapefile_lon').val();
-    Dajaxice.giscube_app.point_inside_feature(point_inside_feature_status,{'selected_vector': selected_vector, 'point_inside_shapefile_lat':point_inside_shapefile_lat, 'point_inside_shapefile_lon':point_inside_shapefile_lon});
+    Dajaxice.gisweb_app.point_inside_feature(point_inside_feature_status,{'selected_vector': selected_vector, 'point_inside_shapefile_lat':point_inside_shapefile_lat, 'point_inside_shapefile_lon':point_inside_shapefile_lon});
   }
 </script>

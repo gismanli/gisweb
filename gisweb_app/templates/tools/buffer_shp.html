@@ -41,7 +41,7 @@
     var selected_shp = $('input[name="current_vector"]:checked').val();
     var buffer_shp_buffer_range = $('#buffer_shp_buffer_range').val();
     var buffer_shp_out_name = $('#buffer_shp_out_name').val();
-    Dajaxice.giscube_app.buffer_shp(buffer_shp_status,{
+    Dajaxice.gisweb_app.buffer_shp(buffer_shp_status,{
       'selected_shp': selected_shp,
       'buffer_shp_buffer_range': buffer_shp_buffer_range,
       'buffer_shp_out_name': buffer_shp_out_name

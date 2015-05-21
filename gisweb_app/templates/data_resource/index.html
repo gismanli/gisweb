@@ -69,7 +69,7 @@
     <ul>
       {% for file in UPLODED_FILES %}
       <li>
-        <a href=""><span class="glyphicon glyphicon-trash red" onclick="Dajaxice.giscube_app.remove_loaded_file('',{'param': '{{ file }}'});location.reload();"></span>&nbsp </a>
+        <a href=""><span class="glyphicon glyphicon-trash red" onclick="Dajaxice.gisweb_app.remove_loaded_file('',{'param': '{{ file }}'});location.reload();"></span>&nbsp </a>
         <a href="/static/uploaded_files/{{ file }}">{{ file }}</a>
       </li><br>
       {% endfor %}
@@ -88,7 +88,7 @@
     document.getElementById('opendap_status').innerHTML = '<div class="alert alert-info" role="alert" >Retrieving data...Please wait.</div>';
     var opendap_url = $('#opendap_url').val();
     var opendap_out_name = $('#opendap_out_name').val();
-    Dajaxice.giscube_app.opendap_getdata(opendap_status,{'opendap_url':opendap_url, 'frm':format, 'opendap_out_name':opendap_out_name});
+    Dajaxice.gisweb_app.opendap_getdata(opendap_status,{'opendap_url':opendap_url, 'frm':format, 'opendap_out_name':opendap_out_name});
   }
 </script>
 

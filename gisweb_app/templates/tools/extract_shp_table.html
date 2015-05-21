@@ -37,6 +37,6 @@
     document.getElementById('extract_shp_table_status').innerHTML = 'Processing...';
     var selected_vector = $('input[name="optionsRadios"]:checked').val();
     var text_name = $('#shp_table_text_name').val();
-    Dajaxice.giscube_app.extract_shp_table_text(extract_shp_table_status,{'selected_vector': selected_vector, 'text_name':text_name});
+    Dajaxice.gisweb_app.extract_shp_table_text(extract_shp_table_status,{'selected_vector': selected_vector, 'text_name':text_name});
   }
 </script>

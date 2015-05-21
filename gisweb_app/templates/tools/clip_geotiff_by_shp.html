@@ -45,6 +45,6 @@
     var selected_geotiff = $('input[name="existing_geotiff"]:checked').val();
     var selected_shapefile = $('input[name="existing_shapefile"]:checked').val();
     var clipped_geotiff_name = $('#clipped_geotiff_name').val();
-    Dajaxice.giscube_app.clip_geotiff_by_shapefile(clip_geotiff_by_shp_status,{'selected_geotiff': selected_geotiff, 'selected_shapefile':selected_shapefile, 'clipped_geotiff_name':clipped_geotiff_name});
+    Dajaxice.gisweb_app.clip_geotiff_by_shapefile(clip_geotiff_by_shp_status,{'selected_geotiff': selected_geotiff, 'selected_shapefile':selected_shapefile, 'clipped_geotiff_name':clipped_geotiff_name});
   }
 </script>

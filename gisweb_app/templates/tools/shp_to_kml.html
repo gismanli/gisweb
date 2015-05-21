@@ -35,6 +35,6 @@
     document.getElementById('shp_to_kml_status').innerHTML = 'Processing...';
     var selected_shp = $('input[name="optionsRadios"]:checked').val();
     var kml_name = $('#shp_to_kml').val();
-    Dajaxice.giscube_app.shapefile_to_kml(shp_to_kml_status,{'selected_shp': selected_shp, 'kml_name':kml_name});
+    Dajaxice.gisweb_app.shapefile_to_kml(shp_to_kml_status,{'selected_shp': selected_shp, 'kml_name':kml_name});
   }
 </script>

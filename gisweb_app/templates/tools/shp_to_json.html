@@ -41,7 +41,7 @@
     var selected_shp = $('input[name="current_vector"]:checked').val();
     var shp_to_json_file = $('#shp_to_json').val();
     var shp_to_json_epsg = $('#shp_to_json_epsg').val();
-    Dajaxice.giscube_app.shapefile_to_json(shp_to_json_status,{
+    Dajaxice.gisweb_app.shapefile_to_json(shp_to_json_status,{
       'selected_shp': selected_shp,
       'shp_to_json_file': shp_to_json_file,
       'shp_to_json_epsg': shp_to_json_epsg

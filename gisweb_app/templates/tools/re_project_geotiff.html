@@ -42,6 +42,6 @@
     var selected_geotiff = $('input[name="optionsRadios"]:checked').val();
     var geotif_re_project_epsg = $("#geotif_re_project_epsg").val();
     var projected_geotiff_name = $('#reporjected_geotiff_name').val();
-    Dajaxice.giscube_app.reproject_geotiff(reproject_geotiff_status,{'selected_geotiff': selected_geotiff, 'geotif_re_project_epsg':geotif_re_project_epsg, 'projected_geotiff_name':projected_geotiff_name});
+    Dajaxice.gisweb_app.reproject_geotiff(reproject_geotiff_status,{'selected_geotiff': selected_geotiff, 'geotif_re_project_epsg':geotif_re_project_epsg, 'projected_geotiff_name':projected_geotiff_name});
   }
 </script>

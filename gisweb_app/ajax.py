@@ -1,13 +1,11 @@
 import os, shutil
 import numpy as np
 import json
-from netCDF4 import Dataset
 from dajaxice.decorators import dajaxice_register
 from gisweb.config import MEDIA_ROOT, MEDIA_URL
 
 from scripts.extract_shp_table import extract_shp_table
-from scripts.metadata import get_nc_data
-from scripts.conversion import nc_to_gtif, nc_to_geojson, shp_to_kml, convert_geotiff_to_kml, shp_to_tif, shp_to_json, geotiff_to_point_shp, geotiff_to_point_json, convert_coord_to_point_shp
+from scripts.conversion import shp_to_kml, convert_geotiff_to_kml, shp_to_tif, shp_to_json, geotiff_to_point_shp, geotiff_to_point_json, convert_coord_to_point_shp
 from scripts.spatial_analysis import buffer_shapefile, find_point_inside_feature
 from scripts.clip_geotiff_by_shp import clip_geotiff_by_shp
 from scripts.data_management import change_geotiff_resolution, color_table_on_geotiff
@@ -17,10 +15,7 @@ from scripts.opendap import opendap_metadata
 
 @dajaxice_register(method='GET')
 def opendap_getdata(request, opendap_url, frm, opendap_out_name):
-    if frm == "nc3" or frm == "nc4":
-        check_frm = "nc"
-    else:
-        check_frm = frm
+    check_frm = frm
     if os.path.isfile('{0}{1}{2}'.format(MEDIA_ROOT, MEDIA_URL, '{0}.{1}'.format(opendap_out_name, check_frm))):
         return json.dumps({'status': '<div class="alert alert-danger" role="alert" >File already exists.</div>'})
     else:
@@ -77,72 +72,6 @@ def extract_shp_table_text(request, selected_vector, text_name):
         return json.dumps({'status': 'File already exists.'})
     else:
         extract_shp_table(MEDIA_ROOT+MEDIA_URL+selected_vector+'.shp', MEDIA_ROOT+MEDIA_URL+text_name)
-        return json.dumps({'status': 'Done'})
-
-
-@dajaxice_register(method='GET')
-def extract_netcdf_header(request, selected_netcdf, text_name):
-    if text_name.split(".")[-1] != "txt":
-        text_name = "{0}.txt".format(text_name)
-    if os.path.isfile('{0}{1}{2}'.format(MEDIA_ROOT, MEDIA_URL, text_name)):
-        return json.dumps({'status': 'File already exists.'})
-    else:
-        s = "ncdump -h {0} > {1}".format(MEDIA_ROOT+MEDIA_URL+selected_netcdf, MEDIA_ROOT+MEDIA_URL+text_name)
-        os.system(s)
-        return json.dumps({'status': 'Done'})
-
-
-@dajaxice_register(method='GET')
-def dump_netcdf_to_text(request, selected_netcdf, text_name):
-    if text_name.split(".")[-1] != "txt":
-        text_name = "{0}.txt".format(text_name)
-    if os.path.isfile('{0}{1}{2}'.format(MEDIA_ROOT, MEDIA_URL, text_name)):
-        return json.dumps({'status': 'File already exists.'})
-    else:
-        s = "ncdump {0} > {1}".format(MEDIA_ROOT+MEDIA_URL+selected_netcdf, MEDIA_ROOT+MEDIA_URL+text_name)
-        os.system(s)
-        return json.dumps({'status': 'Done'})
-
-
-@dajaxice_register(method='GET')
-def get_netcdf_times(request, nc_file, time_var):
-    nc_dataset = Dataset(MEDIA_ROOT+MEDIA_URL+nc_file, mode='r')
-    time_data = nc_dataset.variables[time_var][:]
-    times = [float(t) for t in time_data]
-    return json.dumps({'time_data': times})
-
-
-@dajaxice_register(method='GET')
-def netcdf_to_geotiff(request, nc_file, latitude, longitude, time, value, selected_time, geotiff_name):
-    if geotiff_name.split(".")[-1] != "tif" or geotiff_name.split(".")[-1] != "tiff":
-        geotiff_name = "{0}.tif".format(geotiff_name)
-    nc_dataset = Dataset(MEDIA_ROOT+MEDIA_URL+nc_file, mode='r')
-    latitude_data = nc_dataset.variables[latitude][:]
-    longitude_data = nc_dataset.variables[longitude][:]
-    time_data = nc_dataset.variables[time][:]
-    selected_time_index = np.where(time_data==float(selected_time))[0][0]
-    value_data = get_nc_data(nc_file, latitude, longitude, time, value, selected_time_index)
-    if os.path.isfile('{0}{1}{2}'.format(MEDIA_ROOT, MEDIA_URL, geotiff_name)):
-        return json.dumps({'status': 'File already exists.'})
-    else:
-        nc_to_gtif(latitude_data, longitude_data, value_data, geotiff_name)
-        return json.dumps({'status': 'Done'})
-
-
-@dajaxice_register(method='GET')
-def netcdf_to_geojson(request, nc_file, latitude, longitude, time, value, selected_time, geojson_name):
-    if geojson_name.split(".")[-1] != "json":
-        geojson_name = "{0}.json".format(geojson_name)
-    nc_dataset = Dataset(MEDIA_ROOT+MEDIA_URL+nc_file, mode='r')
-    latitude_data = nc_dataset.variables[latitude][:]
-    longitude_data = nc_dataset.variables[longitude][:]
-    time_data = nc_dataset.variables[time][:]
-    selected_time_index = np.where(time_data==float(selected_time))[0][0]
-    value_data = get_nc_data(nc_file, latitude, longitude, time, value, selected_time_index)
-    if os.path.isfile('{0}{1}{2}'.format(MEDIA_ROOT, MEDIA_URL, geojson_name)):
-        return json.dumps({'status': 'File already exists.'})
-    else:
-        nc_to_geojson(latitude_data, longitude_data, value_data, geojson_name)
         return json.dumps({'status': 'Done'})
 
 

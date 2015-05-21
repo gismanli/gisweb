@@ -9,24 +9,6 @@ from scripts.conversion import shp_to_kml, convert_geotiff_to_kml, shp_to_tif, s
 from scripts.spatial_analysis import buffer_shapefile, find_point_inside_feature
 from scripts.clip_geotiff_by_shp import clip_geotiff_by_shp
 from scripts.data_management import change_geotiff_resolution, color_table_on_geotiff
-from scripts.opendap import load as load_opendap
-from scripts.opendap import opendap_metadata
-
-
-@dajaxice_register(method='GET')
-def opendap_getdata(request, opendap_url, frm, opendap_out_name):
-    check_frm = frm
-    if os.path.isfile('{0}{1}{2}'.format(MEDIA_ROOT, MEDIA_URL, '{0}.{1}'.format(opendap_out_name, check_frm))):
-        return json.dumps({'status': '<div class="alert alert-danger" role="alert" >File already exists.</div>'})
-    else:
-        load_opendap(opendap_url, frm, opendap_out_name)
-        return json.dumps({'status': '<div class="alert alert-success" role="alert" >Successfully retrieved data. Please refresh the page.</div>'})
-
-
-@dajaxice_register(method='GET')
-def opendap_getmetadata(request, opendap_url):
-    metadata = opendap_metadata(opendap_url)
-    return json.dumps({'metadata': metadata.splitlines()})
 
 
 @dajaxice_register(method='GET')

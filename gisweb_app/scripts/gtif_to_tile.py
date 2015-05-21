@@ -1,6 +1,6 @@
 import os
 import shutil
-from giscube.config import MEDIA_ROOT, MEDIA_URL
+from gisweb.config import MEDIA_ROOT, MEDIA_URL
 import subprocess
 
 def create_gtif(gtif):

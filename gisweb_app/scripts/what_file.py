@@ -23,7 +23,7 @@ def what_format(file_path):
     try:
         dataset = ogr.Open(file_path)
         driver_name = dataset.GetDriver().GetName()
-        print driver_name
+        #print driver_name
         return driver_name
     except:
         driver_name = "Format not found."

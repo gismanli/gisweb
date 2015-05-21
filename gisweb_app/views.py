@@ -40,14 +40,6 @@ def data_resource(request, uploaded=''):
             UPLODED_FILES.append(each)
         elif file_format == "GeoJSON":
             UPLODED_FILES.append(each)
-        elif file_format == "Network Common Data Format":
-            UPLODED_FILES.append(each)
-        elif file_format == "NetCDF":
-            UPLODED_FILES.append(each)
-        elif file_format == "Hierarchical Data Format Release 4":
-            UPLODED_FILES.append(each)
-        elif file_format == "Hierarchical Data Format Release 5":
-            UPLODED_FILES.append(each)
         elif each.split(".")[-1] == "txt" or each.split(".")[-1] == "text" or each.split(".")[-1] == "csv" or each.split(".")[-1] == "ascii":
             UPLODED_FILES.append(each)
     if request.method == 'POST':

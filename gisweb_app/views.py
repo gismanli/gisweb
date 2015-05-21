@@ -178,7 +178,6 @@ def tools(request):
     os.chdir(MEDIA_ROOT + MEDIA_URL)
     shp_file_name = [each for each in glob.glob("*.shp") ]
     gtif_file_name = [each for each in glob.glob("*.tif")]
-    nc_file_name = [each for each in glob.glob("*.nc")]
     text_file_name = [each for each in glob.glob("*.txt") ] + [each for each in glob.glob("*.text") ]
     shps_info = []
     tiffs_info = []
@@ -190,14 +189,6 @@ def tools(request):
     for name in gtif_file_name:
         if open_tif_file(name):
             tiffs_info.append(run_tif_info(name))
-    for name in nc_file_name:
-        if open_tif_file(name):
-            nc_metadata = get_nc_metadata(name)
-            ncs_metadata.append(nc_metadata)
-            nc_error = ""
-        else:
-            nc_error = "Cannot open netCDF."
-            break
     for name in text_file_name:
         text_info.append(name)
     context = {'shps_info': shps_info, 'tiffs_info':tiffs_info, 'ncs_metadata':ncs_metadata, 'text_file_name':text_file_name}

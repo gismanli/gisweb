@@ -21,7 +21,6 @@
   <div class="col-md-4">
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#localdata" data-toggle="tab">Local Data</a></li>
-      <li><a href="#opendap" data-toggle="tab">OPeNDAP</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade in active" id="localdata">
@@ -40,25 +39,6 @@
             </div>
           {% endif %}
         </form>
-      </div>
-      <div class="tab-pane fade in" id="opendap">
-        <h3>1: Enter OPeNDAP URL:</h3>
-        <br>
-        <input type="text" class="form-control" id="opendap_url" placeholder="OPeNDAP URL">
-
-        <h3>2: Enter output name</h3>
-        <div class="input-group">
-          <input class="form-control" id="opendap_out_name" type="text" placeholder="Enter output name" value="">
-        </div>
-
-        <br>
-        <div class="alert alert-info" role="alert"><p><small>Example:<br><b>OPeNDAP URL:</b> http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz<br><b>Variable:</b> sst</small></p></div>
-        <button value="opendap_getdata" class="btn btn-primary btn-lg" onclick="opendap_getdata('ASCII')">Get as ASCII</button>
-        <button value="opendap_getdata" class="btn btn-primary btn-lg" onclick="opendap_getdata('nc3')">Get as netCDF3</button>
-        <button value="opendap_getdata" class="btn btn-primary btn-lg" onclick="opendap_getdata('nc4')">Get as netCDF4</button>
-        <br>
-        <br>
-        <div id='opendap_status'></div>
       </div>
     </div>
   </div>

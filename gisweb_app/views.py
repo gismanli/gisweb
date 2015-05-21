@@ -139,8 +139,8 @@ def data_visualiser(request):
     geotifs = []
     shp_error = ""
     tif_error = ""
-    shp_file_name = [each for each in glob.glob("*.shp")] #TODO: Use GDLA file format to recognize shapefiles, not with parsing
-    gtif_file_name = [each for each in glob.glob("*.tif")] #TODO: Use GDLA file format to recognize geotif, not with parsing
+    shp_file_name = [each for each in glob.glob("*.shp")]
+    gtif_file_name = [each for each in glob.glob("*.tif")]
     json_file_name = [each for each in glob.glob("*.json")]
 
     #add all GeoJSON to jsons

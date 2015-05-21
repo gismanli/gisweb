@@ -4,21 +4,28 @@
 
 <!-- /left-nav-stack-bar -->
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-2" id="side_menu">
+  <div class="col-md-2">
+    <img id="logo" src="{% static "img/logo_beta.png" %}">
+  </div>
+  <div class="col-md-2" id="side_menu">
     <ul class="nav nav-pills nav-stacked">
       <li class="active"><a href="/resource">Data Resource<span class="glyphicon glyphicon-inbox right"></span></a></li>
       <li><a href="/information">Data Information<span class="glyphicon glyphicon-info-sign right"></span></a></li>
       <li><a href="/visualiser">Data Visualiser<span class="glyphicon glyphicon-globe right"></span></a></li>
       <li><a href="/tools">GeoSpatial Tools<span class="glyphicon glyphicon-cog right"></span></a></li>
+      <a href="https://github.com/MBoustani/GISCube" target="_blank"><img id="github" src="{% static "img/github.png" %}"></a>
     </ul>
   </div>
   <!-- left-nav-stack-bar/ -->
 
   <div class="col-md-4">
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#localdata" data-toggle="tab">Local Data</a></li>
+      <li><a href="#opendap" data-toggle="tab">OPeNDAP</a></li>
+    </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade in active" id="localdata">
-      <div class="alert alert-info"><p>Supported formats: Shapefile, GeoTIFF and GeoJSON.</p></div>
+      <div class="alert alert-info"><p>Supported formats: Shapefile, GeoTIFF, GeoJSON, netCDF and HDF files.</p></div>
         <form action="{% url 'resource' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <p>{{ form.non_field_errors }}</p>
@@ -34,6 +41,25 @@
           {% endif %}
         </form>
       </div>
+      <div class="tab-pane fade in" id="opendap">
+        <h3>1: Enter OPeNDAP URL:</h3>
+        <br>
+        <input type="text" class="form-control" id="opendap_url" placeholder="OPeNDAP URL">
+
+        <h3>2: Enter output name</h3>
+        <div class="input-group">
+          <input class="form-control" id="opendap_out_name" type="text" placeholder="Enter output name" value="">
+        </div>
+
+        <br>
+        <div class="alert alert-info" role="alert"><p><small>Example:<br><b>OPeNDAP URL:</b> http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz<br><b>Variable:</b> sst</small></p></div>
+        <button value="opendap_getdata" class="btn btn-primary btn-lg" onclick="opendap_getdata('ASCII')">Get as ASCII</button>
+        <button value="opendap_getdata" class="btn btn-primary btn-lg" onclick="opendap_getdata('nc3')">Get as netCDF3</button>
+        <button value="opendap_getdata" class="btn btn-primary btn-lg" onclick="opendap_getdata('nc4')">Get as netCDF4</button>
+        <br>
+        <br>
+        <div id='opendap_status'></div>
+      </div>
     </div>
   </div>
 
@@ -43,7 +69,7 @@
     <ul>
       {% for file in UPLODED_FILES %}
       <li>
-        <a href=""><span class="glyphicon glyphicon-trash red" onclick="Dajaxice.gisweb_app.remove_loaded_file('',{'param': '{{ file }}'});location.reload();"></span>&nbsp </a>
+        <a href=""><span class="glyphicon glyphicon-trash red" onclick="Dajaxice.giscube_app.remove_loaded_file('',{'param': '{{ file }}'});location.reload();"></span>&nbsp </a>
         <a href="/static/uploaded_files/{{ file }}">{{ file }}</a>
       </li><br>
       {% endfor %}
@@ -52,5 +78,18 @@
       <h3><small>No documents.</small></h3>
   {% endif %}
 </div>
+
+<script>
+  function opendap_status(data) {
+    //location.reload();
+   document.getElementById('opendap_status').innerHTML = data.status;
+  }
+  function opendap_getdata(format) {
+    document.getElementById('opendap_status').innerHTML = '<div class="alert alert-info" role="alert" >Retrieving data...Please wait.</div>';
+    var opendap_url = $('#opendap_url').val();
+    var opendap_out_name = $('#opendap_out_name').val();
+    Dajaxice.giscube_app.opendap_getdata(opendap_status,{'opendap_url':opendap_url, 'frm':format, 'opendap_out_name':opendap_out_name});
+  }
+</script>
 
 {% include 'footer.html' %}

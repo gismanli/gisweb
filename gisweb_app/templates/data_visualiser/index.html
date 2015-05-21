@@ -10,6 +10,7 @@
 <!-- /left-nav-stack-bar -->
 <div class="row">
   <div class="col-md-2">
+    <img id="logo" src="{% static "img/logo_beta.png" %}">
   </div>
   <div class="col-md-2" id="side_menu">
     <ul class="nav nav-pills nav-stacked">
@@ -17,6 +18,7 @@
       <li><a href="information">Data Information<span class="glyphicon glyphicon-info-sign right"></span></a></li>
       <li class="active"><a href="visualiser">Data Visualiser<span class="glyphicon glyphicon-globe right"></span></a></li>
       <li><a href="tools">GeoSpatial Tools<span class="glyphicon glyphicon-cog right"></span></a></li>
+      <a href="https://github.com/MBoustani/GISCube" target="_blank"><img id="github" src="{% static "img/github.png" %}"></a>
     </ul>
   </div>
 <!-- left-nav-stack-bar/ -->
@@ -26,6 +28,7 @@
   <ul id="myTab" class="nav nav-tabs">
     <li class="active"><a href="#vectorData" data-toggle="tab">Vector Data</a></li>
     <li><a href="#rasterData" data-toggle="tab">Raster Data</a></li>
+    <li><a href="#netcdfData" data-toggle="tab">netCDF Data</a></li>
   </ul>
 
    <div id="myTabContent" class="tab-content">
@@ -48,6 +51,12 @@
           </label>
         </div>
       {% endfor %}
+    </div>
+    <div class="tab-pane fade in" id="netcdfData">
+      <h3>1- Go to "GeoSpatial tools" page</h3>
+      <h3>2- Convert netCDF to GeoTIFF</h3>
+      <h3>3- Come back to "Data Visualiser page"</h3>
+      <h3>4- Visualize the GeoTIIF"</h3>
     </div>
    </div>
 </div>

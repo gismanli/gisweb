@@ -34,9 +34,19 @@ def data_resource(request, uploaded=''):
             UPLODED_FILES.append(each)
         if each.split(".")[-1]=="prj":
             UPLODED_FILES.append(each)
+        elif file_format == "LIBKML" or file_format=="Kml Super Overlay":
+            UPLODED_FILES.append(each)
         elif file_format == "GeoTIFF":
             UPLODED_FILES.append(each)
         elif file_format == "GeoJSON":
+            UPLODED_FILES.append(each)
+        elif file_format == "Network Common Data Format":
+            UPLODED_FILES.append(each)
+        elif file_format == "NetCDF":
+            UPLODED_FILES.append(each)
+        elif file_format == "Hierarchical Data Format Release 4":
+            UPLODED_FILES.append(each)
+        elif file_format == "Hierarchical Data Format Release 5":
             UPLODED_FILES.append(each)
         elif each.split(".")[-1] == "txt" or each.split(".")[-1] == "text" or each.split(".")[-1] == "csv" or each.split(".")[-1] == "ascii":
             UPLODED_FILES.append(each)
@@ -46,6 +56,7 @@ def data_resource(request, uploaded=''):
             newdoc = Document(docfile = request.FILES['docfile'])
             uploaded_file_name = newdoc.docfile.name
             newdoc.save()
+
             return HttpResponseRedirect('/resource/{0}'.format(uploaded_file_name))
     else:
         form = DocumentForm()
@@ -69,6 +80,8 @@ def data_information(request):
     shps_info = []
     shp_error = "No Shapefile"
     tif_error = "No GeoTIFF"
+    nc_error = "No netCDF"
+    hdf_error = "No HDF"
     for name in shp_file_name:
         if open_shp_file(name):
             shps_info.append(run_shp_info(name))
@@ -87,10 +100,34 @@ def data_information(request):
             tif_error = "Cannot open tif file."
             break
 
+    nc_file_name = [each for each in glob.glob("*.nc") ]
+    ncs_metadata = []
+    for name in nc_file_name:
+        if get_nc_metadata(name):
+            ncs_metadata.append(get_nc_metadata(name))
+            nc_error = ""
+        else:
+            nc_error = "Cannot open netCDF file."
+            break
+
+    hdf_file_name = [each for each in glob.glob("*.he5") ]
+    hdfs_metadata = []
+    for name in hdf_file_name:
+        if get_hdf_metadata(name):
+            hdfs_metadata.append(get_hdf_metadata(name))
+            hdf_error = ""
+        else:
+            hdf_error = "Cannot open HDF file."
+            break
+
     context = {'shps_info': shps_info,
                'tifs_info': tifs_info,
+               'ncs_metadata':ncs_metadata,
+               'hdfs_metadata':hdfs_metadata,
                'shp_error':shp_error,
                'tif_error':tif_error,
+               'nc_error':nc_error,
+               'hdf_error':hdf_error
                }
     
     return render(request, 'data_information/index.html', context)
@@ -153,8 +190,16 @@ def tools(request):
     for name in gtif_file_name:
         if open_tif_file(name):
             tiffs_info.append(run_tif_info(name))
+    for name in nc_file_name:
+        if open_tif_file(name):
+            nc_metadata = get_nc_metadata(name)
+            ncs_metadata.append(nc_metadata)
+            nc_error = ""
+        else:
+            nc_error = "Cannot open netCDF."
+            break
     for name in text_file_name:
         text_info.append(name)
-    context = {'shps_info': shps_info, 'tiffs_info':tiffs_info, 'text_file_name':text_file_name}
+    context = {'shps_info': shps_info, 'tiffs_info':tiffs_info, 'ncs_metadata':ncs_metadata, 'text_file_name':text_file_name}
 
     return render(request, 'tools/index.html', context)

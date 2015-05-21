@@ -1,4 +1,4 @@
-"""
+%s/gisweb/gisweb/g"""
 Django settings for gisweb project.
 
 For more information on this file, see

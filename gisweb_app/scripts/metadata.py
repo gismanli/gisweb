@@ -11,6 +11,7 @@ try:
 except ImportError:
     import ogr
 
+from netCDF4 import Dataset
 import numpy as np
 import urllib2
 import json
@@ -196,10 +197,10 @@ def get_shp_layer_extend(layer_file):
 
 def run_shp_info(file_path):
     layers = []
-    vector_file = open_shp_file(file_path)
-    file_name = get_shp_name(vector_file)
-    file_format = get_shp_format(vector_file)
-    file_number_of_layers = get_shp_number_of_layers(vector_file)
+    vector_file = open_shp_file(file_path)     #To open vector file
+    file_name = get_shp_name(vector_file)     #To print file name
+    file_format = get_shp_format(vector_file)     #To print file format
+    file_number_of_layers = get_shp_number_of_layers(vector_file)     #To print number of layer/s
     for layer_index in range(file_number_of_layers):
         layer = {}
         layer_file = get_shp_layer(vector_file, layer_index)
@@ -298,9 +299,9 @@ def get_raster_pixle_size(raster_geotransform):
 
 def run_tif_info(file_path):
     layers = []
-    raster_file = open_tif(file_path)
-    file_name = get_tif_name(raster_file)
-    file_format = get_tif_format(raster_file)
+    raster_file = open_tif(file_path)     #To open raster file
+    file_name = get_tif_name(raster_file)     #To print file name
+    file_format = get_tif_format(raster_file)     #To print file format
     raster_number_of_band = get_raster_number_of_band(raster_file)
     raster_x_y_size = get_raster_x_y_size(raster_file)
     raster_projection = get_raster_projection(raster_file)

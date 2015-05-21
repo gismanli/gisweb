@@ -8,6 +8,7 @@
 {% include '/tools/shp_to_json.html' %}
 {% include '/tools/coord_to_point_shp.html' %}
 {% include '/tools/buffer_shp.html' %}
+{% include '/tools/point_inside_shapefile.html' %}
 
 
 <!-- raster tools-->
@@ -17,12 +18,20 @@
 {% include '/tools/geotiff_resolution.html' %}
 {% include '/tools/tif_to_point_shp.html' %}
 {% include '/tools/tif_to_point_json.html' %}
+{% include '/tools/color_table_geotiff.html' %}
+
+<!-- netCDF tools-->
+{% include '/tools/netcdf_to_geotiff.html' %}
+{% include '/tools/netcdf_to_geojson.html' %}
+{% include '/tools/ncdump_header.html' %}
+{% include '/tools/ncdump_whole_netcdf.html' %}
 
 {% include 'header.html' %}
 
 
 <div class="row">
   <div class="col-md-2">
+    <img id="logo" src="{% static "img/logo_beta.png" %}">
   </div>
   <div class="col-md-2" id="side_menu">
     <ul class="nav nav-pills nav-stacked">
@@ -30,12 +39,13 @@
       <li><a href="information">Data Information<span class="glyphicon glyphicon-info-sign right"></span></a></li>
       <li><a href="visualiser">Data Visualiser<span class="glyphicon glyphicon-globe right"></span></a></li>
       <li class="active"><a href="tools">GeoSpatial Tools<span class="glyphicon glyphicon-cog right"></span></a></li>
+      <a href="https://github.com/MBoustani/GISCube" target="_blank"><img id="github" src="{% static "img/github.png" %}"></a>
     </ul>
   </div>
 
 <div id="toggle"> </div>
 
-<div class="container col-md-5">
+<div class="container col-md-3">
 <div class="tree">
     <ul>
         <li>
@@ -80,6 +90,9 @@
                         <li>
 	                        <span><div class="icon-leaf open" id="buffer_shapefile"><div id="tool_title">Buffer Shapefile</div></div></span>
                         </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="point_inside_shapefile"><div id="tool_title">Point inside Shapefile</div></div></span>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -87,7 +100,7 @@
     </ul>
 </div>
 </div>
-<div class="container col-md-5">
+<div class="container col-md-3">
 <div class="tree">
     <ul>
         <li>
@@ -118,6 +131,47 @@
                         </li>
                         <li>
 	                        <span><div class="icon-leaf open" id="geotiff_resolution"><div id="tool_title">Change GeoTIFF Resolution</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span><i class="icon-minus-sign"></i><div id="tools_subtitle">Data Management</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="color_table_geotiff"><div id="tool_title">Add Color on GeoTIFF</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+	    </ul>
+        </li>
+    </ul>
+</div>
+</div>
+<div class="container col-md-3">
+<div class="tree">
+    <ul>
+        <li>
+            <span><i class="icon-folder-open"></i><div id="tools_title">netCDF Tools</div></span>
+            <ul>
+                <li>
+                	<span><i class="icon-minus-sign"></i><div id="tools_subtitle">Conversion</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="netcdf_to_geotiff"><div id="tool_title">netCDF to GeoTIFF</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="netcdf_to_geojson"><div id="tool_title">netCDF to GeoJSON</div></div></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span><i class="icon-minus-sign"></i><div id="tools_subtitle">Extraction</div></span>
+                    <ul>
+                        <li>
+	                        <span><div class="icon-leaf open" id="ncdump_dump_to_text"><div id="tool_title">netCDF dump to text</div></div></span>
+                        </li>
+                        <li>
+	                        <span><div class="icon-leaf open" id="ncdump_header_to_text"><div id="tool_title">netCDF header to text</div></div></span>
                         </li>
                     </ul>
                 </li>

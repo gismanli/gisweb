@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+'''
+Project:       Geothon (https://github.com/MBoustani/Geothon)
+File:          Vector/export_shp_att_csv.py
+Description:   This code exports Shapefile attribute table to csv file
+Author:        Maziyar Boustani (github.com/MBoustani)
+'''
 import csv
 
 try:

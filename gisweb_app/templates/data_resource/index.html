@@ -4,16 +4,12 @@
 
 <!-- /left-nav-stack-bar -->
 <div class="row">
-  <div class="col-md-2">
-    <img id="logo" src="{% static "img/logo_beta.png" %}">
-  </div>
   <div class="col-md-2" id="side_menu">
     <ul class="nav nav-pills nav-stacked">
       <li class="active"><a href="/resource">Data Resource<span class="glyphicon glyphicon-inbox right"></span></a></li>
       <li><a href="/information">Data Information<span class="glyphicon glyphicon-info-sign right"></span></a></li>
       <li><a href="/visualiser">Data Visualiser<span class="glyphicon glyphicon-globe right"></span></a></li>
       <li><a href="/tools">GeoSpatial Tools<span class="glyphicon glyphicon-cog right"></span></a></li>
-      <a href="https://github.com/MBoustani/GISCube" target="_blank"><img id="github" src="{% static "img/github.png" %}"></a>
     </ul>
   </div>
   <!-- left-nav-stack-bar/ -->
@@ -24,7 +20,7 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade in active" id="localdata">
-      <div class="alert alert-info"><p>Supported formats: Shapefile, GeoTIFF, GeoJSON, netCDF and HDF files.</p></div>
+      <div class="alert alert-info"><p>Supported formats: Shapefile, GeoTIFF, GeoJSON files.</p></div>
         <form action="{% url 'resource' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <p>{{ form.non_field_errors }}</p>

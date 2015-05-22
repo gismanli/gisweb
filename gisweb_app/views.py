@@ -15,7 +15,6 @@ from gisweb_app.scripts.metadata import run_shp_info
 from gisweb_app.scripts.metadata import run_tif_info
 from gisweb_app.scripts.what_file import what_format
 from gisweb_app.scripts.conversion import get_geojson
-from gisweb_app.scripts.metadata import get_nc_metadata, get_hdf_metadata
 from gisweb_app.scripts.gtif_to_tile import create_gtif
 
 #resource page

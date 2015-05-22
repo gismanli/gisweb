@@ -67,3 +67,12 @@ body{width: 99%; padding-top: 3px; padding-bottom: 3px;}
 #tools_title{font-size: 30px; color: #31a467; font-weight: 100;}
 #tools_subtitle{font-size: 20px; color: #b6af32; font-weight: 100;}
 #tool_title{font-size: 15px; color: #4f4d50; font-weight: 200;}
+
+#header {margin-bottom: 0;height: 80px;line-height: 80px;font-family: GothamRoundedBook, "Helvetica Neue", Helvetica, "Microsoft YaHei", Arial;font-weight: bold;background-color: #41423D;padding-right: 15px;padding-left: 15px;}
+#navbar-header{height:80px;float:left;}
+#navbar-collapse{height: 80px;width: 450px;float: right;padding-bottom:10px;}
+#navbar-nav{margin-top: auto;}
+#navbar-nav li{float:left;}
+#navbar-nav li a{font-weight: normal;color: #fff;font-size:14px;border-radius: 2px;padding: 10px 15px;text-decoration: none;}
+#navbar-nav li a:hover{color: #009BAE;}
+#navbar-nav .header-active>a{background-color: #333333;}

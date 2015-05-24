@@ -3,10 +3,9 @@
 
 <div class="menu closed" id="menu_reproject_geotiff">
 <span class="close glyphicon glyphicon-remove red"></span>
-<h2>Re-Project GeoTIFF</h2>
-      <h3>This tool re-projects and creates new GeoTIFF data.</h3>
+<h2>坐标转换</h2>
       <div class="container">
-	<h2><small>1- Select from current GeoTIFF data:</small></h2>
+	<h2><small>第一步：选择GeoTIFF文件:</small></h2>
       	{% if not tiffs_info %}
 	  <div class="alert alert-warning" role="alert">No GeoTIFF</div>
 	{% endif %}
@@ -17,17 +16,17 @@
       </div>
       {% endfor %}
       
-      <h2><small>2- Enter EPSG: (<a href="http://en.wikipedia.org/wiki/List_of_map_projections" target="_blank">more info</a>):</small></h2>
+      <h2><small>第二步：输入坐标参考(EPSG): (<a href="http://en.wikipedia.org/wiki/List_of_map_projections" target="_blank">more info</a>):</small></h2>
 
     <input class="form-control" id="geotif_re_project_epsg" type="text" placeholder="Enter EPSG" value="">
 
-      <h2><small>3- Enter name for projected file:</small></h2>
+      <h2><small>第三步：输入新的文件名称:</small></h2>
       
       <div class="input-group">
       <input class="form-control" id="reporjected_geotiff_name" type="text" placeholder="Enter name" value="">
     </div>
 
-  <h2><small>4- Re-project GeoTIFF data:</small></h2>
+  <h2><small>第四步：转换:</small></h2>
   <button type="button" class="btn btn-primary btn-lg" onclick="reproject_geotiff()">Re-Project</button>
       <p id='reproject_geotiff_status'></p>
       </div>

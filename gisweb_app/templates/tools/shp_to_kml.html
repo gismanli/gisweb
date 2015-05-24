@@ -2,10 +2,9 @@
 
 <div class="menu closed" id="menu_shp_to_kml">
 <span class="close glyphicon glyphicon-remove red"></span>
-  <h2>Convert Shapefile to KML</h2>
-    <h3>This tool converts shapefile to KML file format.</h3>
+  <h2>Shapefile转KML</h2>
     <div class="container">
-      <h2><small>1- Select from current vector data:</small></h2>
+      <h2><small>第一步：选择要转换的数据:</small></h2>
       	{% if not shps_info %}
 	  <div class="alert alert-warning" role="alert">No shapefile</div>
 	{% endif %}
@@ -16,7 +15,7 @@
       </div>
       {% endfor %}
 
-      <h2><small>2- Enter text file name:</small></h2>
+      <h2><small>第二步：输入新的文件名称:</small></h2>
 
       <div class="input-group">
         <input class="form-control" id="shp_to_kml" type="text" placeholder="Enter KML file name" value="">

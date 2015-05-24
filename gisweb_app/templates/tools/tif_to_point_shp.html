@@ -3,10 +3,9 @@
 
 <div class="menu closed" id="menu_tif_to_point_shp">
 <span class="close glyphicon glyphicon-remove red"></span>
-<h2>Convert GeoTIFF to Point Shapefile</h2>
-      <h3>This tool converts GeoTIFF to point shapefile format.</h3>
+<h2>GeoTIFF转Point Shapefile</h2>
       <div class="container">
-	<h2><small>1- Select from current GeoTIFF:</small></h2>
+	<h2><small>第一步：选择GeoTIFF文件:</small></h2>
       	{% if not tiffs_info %}
 	  <div class="alert alert-warning" role="alert">No GeoTIFF</div>
 	{% endif %}
@@ -17,17 +16,17 @@
       </div>
       {% endfor %}
       
-    <h2><small>2- Enter output Shapefile name:</small></h2>
+    <h2><small>第二步：输入Shapefile的名称:</small></h2>
     <div class="input-group">
       <input class="form-control" id="tif_to_point_shp_name" type="text" placeholder="Output Shapefile name" value="">
     </div>
 
-    <h2><small>3- Enter output Shapefile EPSG:</small></h2>
+    <h2><small>第三步：输入Shapefile的坐标参考(EPSG):</small></h2>
     <div class="input-group">
       <input class="form-control" id="tif_to_point_shp_epsg" type="text" placeholder="Output Shapefile EPSG" value="">
     </div>
 
-  <h2><small>4- Convert GeoTIFF to Point Shapefile:</small></h2>
+  <h2><small>第四步：转换:</small></h2>
   <button type="button" class="btn btn-primary btn-lg" onclick="tif_to_point_shp()">Convert</button>
       <p id='tif_to_point_shp_status'></p>
       </div>

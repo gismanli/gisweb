@@ -3,10 +3,9 @@
 
 <div class="menu closed" id="menu_clip_geotiff_by_shp">
 <span class="close glyphicon glyphicon-remove red"></span>
-<h2>Clip GeoTIFF by Shapefile</h2>
-      <h3>This tool clips GeoTIFF by Shapefile (only polygon shapefile will be accepted)</h3>
+<h2>根据shp裁剪GeoTIFF</h2>
       <div class="container">
-	<h2><small>1- Select from current GeoTIFF:</small></h2>
+	<h2><small>第一步：选择要裁剪的GeoTIFF文件:</small></h2>
       	{% if not tiffs_info %}
 	  <div class="alert alert-warning" role="alert">No GeoTIFF</div>
 	{% endif %}
@@ -16,7 +15,7 @@
 	<p>{{ each|file_name }}</p>
       </div>
       {% endfor %}
-      <h2><small>2- Select from current Vector:</small></h2>
+      <h2><small>第二步：选择shp文件:</small></h2>
 	{% for each in shps_info %}
 	<div class="radio">
 	<input type="radio" name="existing_shapefile" id="existing_shapefile" value="{{ each|layer_name }}">
@@ -24,13 +23,13 @@
       </div>
       {% endfor %}
       
-      <h2><small>3- Enter clipped GeoTIFF name:</small></h2>
+      <h2><small>第三步：输入裁剪后GeoTIFF的名称:</small></h2>
 
     <div class="input-group">
       <input class="form-control" id="clipped_geotiff_name" type="text" placeholder="Enter new GeoTIFF" value="">
     </div>
 
-  <h2><small>4- Clip GeoTIFF:</small></h2>
+  <h2><small>第四步：裁剪:</small></h2>
   <button type="button" class="btn btn-primary btn-lg" onclick="clip_geotiff_by_shp()">Clip GeoTIFF</button>
       <p id='clip_geotiff_status'></p>
       </div>

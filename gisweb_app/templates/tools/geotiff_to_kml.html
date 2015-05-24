@@ -3,10 +3,9 @@
 
 <div class="menu closed" id="menu_geotiff_to_kml">
 <span class="close glyphicon glyphicon-remove red"></span>
-<h2>Convert GeoTIFF to KML</h2>
-      <h3>This tool converts GeoTIFF to KML file format.</h3>
+<h2>GeoTIFF转KML</h2>
       <div class="container">
-	<h2><small>1- Select from current GeoTIFF:</small></h2>
+	<h2><small>第一步：选择GeoTIFF文件:</small></h2>
 	{% for each in tiffs_info %}
 	<div class="radio">
 	<input type="radio" name="existing_geotiff" id="existing_geotiff" value="{{ each|file_name }}">
@@ -14,13 +13,13 @@
       </div>
       {% endfor %}
       
-      <h2><small>2- Enter KML file name:</small></h2>
+      <h2><small>第二步：输入KML的名称:</small></h2>
 
     <div class="input-group">
       <input class="form-control" id="geotiff_to_kml_name" type="text" placeholder="Enter KML name" value="">
     </div>
 
-  <h2><small>3- Convert GeoTIFF to KML:</small></h2>
+  <h2><small>第三步：转换:</small></h2>
   <button type="button" class="btn btn-primary btn-lg" onclick="geotiff_to_kml()">Convert</button>
       <p id='geotiff_to_kml_status'></p>
       </div>

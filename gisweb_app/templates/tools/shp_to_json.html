@@ -2,10 +2,9 @@
 
 <div class="menu closed" id="menu_shp_to_json">
 <span class="close glyphicon glyphicon-remove red"></span>
-  <h2>Convert Shapefile to GeoJSON</h2>
-    <h3>This tool converts shapefile to GeoJSON file format.</h3>
+  <h2>Shapefile转GeoJSON</h2>
     <div class="container">
-      <h2><small>1- Select from current shapefile data:</small></h2>
+      <h2><small>第一步：选择shp数据:</small></h2>
       	{% if not shps_info %}
 	  <div class="alert alert-warning" role="alert">No shapefile</div>
 	{% endif %}
@@ -16,17 +15,17 @@
       </div>
       {% endfor %}
 
-      <h2><small>2-(optional) Enter EPSG: (<a href="http://en.wikipedia.org/wiki/List_of_map_projections">more info</a>)</small></h2>
+      <h2><small>第二步：输入坐标参考(EPSG): (<a href="http://en.wikipedia.org/wiki/List_of_map_projections">more info</a>)</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_json_epsg" type="text" placeholder="Enter EPSG number" value="">
       </div>
 
-      <h2><small>3- Enter GeoJSON file name:</small></h2>
+      <h2><small>第三步：输入GeoJSON的名称:</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_json" type="text" placeholder="Output GeoJSON name" value="">
       </div>
 
-      <h2><small>4- Convert:</small></h2>
+      <h2><small>第四步：转换:</small></h2>
       <button type="button" class="btn btn-primary btn-lg" onclick="shp_to_json()">Convert</button>
         <p id='shp_to_json_status'></p>
     </div>

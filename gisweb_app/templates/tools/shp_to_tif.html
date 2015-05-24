@@ -2,10 +2,9 @@
 
 <div class="menu closed" id="menu_shp_to_tif">
 <span class="close glyphicon glyphicon-remove red"></span>
-  <h2>Convert Shapefile to GeoTIFF</h2>
-    <h3>This tool converts shapefile to GeoTIFF file format.</h3>
+  <h2>Shapefile转GeoTIFF</h2>
     <div class="container">
-      <h2><small>1- Select from current shapefile data:</small></h2>
+      <h2><small>第一步：选择要转换的shp数据:</small></h2>
       	{% if not shps_info %}
 	  <div class="alert alert-warning" role="alert">No shapefile</div>
 	{% endif %}
@@ -16,40 +15,40 @@
       </div>
       {% endfor %}
 
-      <h2><small>2- Enter Shapefile layer name:</small></h2>
+      <h2><small>第二步：输入shp的图层名称:</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_tif_layer" type="text" placeholder="Shapefile layer name" value="">
       </div>
 
-      <h2><small>3- Enter EPSG: (<a href="http://en.wikipedia.org/wiki/List_of_map_projections">more info</a>)</small></h2>
+      <h2><small>第三步：输入坐标参考系(EPSG): (<a href="http://en.wikipedia.org/wiki/List_of_map_projections">more info</a>)</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_tif_epsg" type="text" placeholder="Enter EPSG number" value="">
       </div>
 
-      <h2><small>4- Enter GeoTIFF file name:</small></h2>
+      <h2><small>第四步：输入新的GeoTIFF文件名称:</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_tif" type="text" placeholder="Output GeoTIFF name" value="">
       </div>
 
-      <h2><small>5- Enter GeoTIFF width and height pixels:</small></h2>
+      <h2><small>第五步：输入GeoTIFF数据的横向和纵向像素:</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_tif_width" type="text" placeholder="Output GeoTIFF width" value="">
 	<input class="form-control" id="shp_to_tif_height" type="text" placeholder="Output GeoTIFF height" value="">
       </div>
 
-      <h2><small>6- Enter GeoTIFF output band data type:</small></h2>
+      <h2><small>第六步：输入GeoTIFF输出范围类型:</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_tif_ot" type="text" placeholder="GeoTIFF band type" value="">
       </div>
 
-      <h2><small>7- Enter burn for each band:</small></h2>
+      <h2><small>第七步：输入地域为每个边界:</small></h2>
       <div class="input-group">
         <input class="form-control" id="shp_to_tif_burn1" type="text" placeholder="-burn 1" value="">
 	<input class="form-control" id="shp_to_tif_burn2" type="text" placeholder="-burn 3" value="">
 	<input class="form-control" id="shp_to_tif_burn3" type="text" placeholder="-burn 3" value="">
       </div>
 
-      <h2><small>8- Convert:</small></h2>
+      <h2><small>第八步：转换:</small></h2>
       <button type="button" class="btn btn-primary btn-lg" onclick="shp_to_tif()">Convert</button>
         <p id='shp_to_tif_status'></p>
     </div>
